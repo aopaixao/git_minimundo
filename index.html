@@ -1,501 +1,502 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>NetSports</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
-<link href="css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
-<link href="css/shield_ui.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+    <title>NetSports</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet">
+    <link href="css/shield_ui.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 
 </head>
 <body>
 
 <div class="container">
-	
-    <header class="row">
-        <!-- <h1>NetSports - CRUD</h1>    -->
-    </header>
-	
-	<!--
-	<div class="row">
-		<div role="main" class="col-md-8 col-md-push-4">
-				
-		</div>
-		<aside role="complementary" class="col-md-4 col-md-pull-8">
-			   
-		</aside>
-	</div>
-	-->
-	
-	<div class="row">
-        
-		<div class="no-gutter">
-			<aside role="complementary" class="col-md-2">
 
-				<!-- menu -->
-				<div id="MainMenu">
-					<div class="list-group list-special panel">
-						<a href="#opt1" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Clientes  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt1">
-							<a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-clientes', 'cliente/lista');">Listar</a>
-							<a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-clientes', '');" >Novo</a>
-						</div>
-						
-						<a href="#opt2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Tel. Clientes  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt2">
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-tel-clientes', 'telCliente/lista');">Listar</a>
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-tel-clientes', '');" >Novo</a>
-						</div>
-						
-						<a href="#opt3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Fornecedores  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt3">
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-fornecedores', 'fornecedor/lista');">Listar</a>
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-fornecedores', '');" >Novo</a>
-						</div>
-						
-						<a href="#opt4" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Tel. Fornecedores  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt4">
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-tel-fornecedores', 'telFornecedor/lista');">Listar</a>
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-tel-fornecedores', '');" >Novo</a>
-						</div>
-						
-                        <!--
-						<a href="#opt5" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Pedidos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt5">
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-pedidos', 'pedido/lista');">Listar</a>
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-pedidos', '');" >Novo</a>
-						</div>
-                        -->
-						
-						<a href="#opt6" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
-							Produtos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
-						</a>
-						<div class="collapse" id="opt6">
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-produtos', 'produto/lista');">Listar</a>
-                            <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-produtos', '');" > Novo </a>
-						</div>
-						
-					</div>
-				</div>
-				<!-- /menu -->
-			
-			</aside>
-		</div>
-		
-		<div id="container-principal" role="main" class="col-md-10">
-		
-			<!-- form Clientes -->
-            <form method="post" id="form-clientes">
-                
-                <h3>Clientes</h3>
-                <hr />
-                
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="cpf">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf">
-                    </div>
+<header class="row">
+    <!-- <h1>NetSports - CRUD</h1>    -->
+</header>
 
-                    <div class="form-group col-md-8">
-                        <label for="nome_cliente">Nome</label>
-                        <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" >
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="email_cliente">E-mail</label>
-                        <input type="text" class="form-control" id="email_cliente"  name="email_cliente"  >
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="endereco_cliente">Endereço</label>
-                        <input type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" >
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="cep_cliente">CEP</label>
-                        <input type="text" class="form-control" id="cep_cliente" name="cep_cliente" >
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="senha_cliente">Senha</label>
-                        <input type="password" class="form-control" id="senha_cliente" name="senha_cliente" >
-                    </div>
-                </div>            
-            
-                <hr />
-                <div id="actions" class="row">
-                    <div class="col-md-12">
-                        <input type="hidden" class="form-control" name="acao" value="cliente/cadastro" >
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <a href="index.html" class="btn btn-default">Cancelar</a>
-                    </div>
-                </div>  
-            </form>            
-            <!-- /form Clientes -->
-            
-            <!-- form Lista Clientes -->
-			<form id="form-lista-clientes">
-				
-				<h3>Clientes</h3>
-				<hr />
-                
-                <table id="tab-lista-clientes"></table>
-				
-			</form>			
-			<!-- /form Lista Clientes -->
-            
-			<!-- form Tel-Clientes -->
-			<form method="post" id="form-tel-clientes">
-				
-				<h3>Telefones de Clientes</h3>
-				<hr />
-				
-				<div class="row">
-					<div class="form-group col-md-4">
-						<label for="pfk_cpf">CPF</label>
-						<select class="select form-control" id="pfk_cpf" name="pfk_cpf" >
-							<option value="Selecione">
-								Selecione
-                            </option>
-						</select>						
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="numero_tel_cliente">Número</label>
-						<input type="text" class="form-control" id="numero_tel_cliente" name="numero_tel_cliente">
-					</div>
-				</div>			
-			
-				<hr />
-				<div id="actions" class="row">
-					<div class="col-md-12">
-                        <input type="hidden" class="form-control" name="acao" value="telCliente/cadastro" >
-						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a href="index.html" class="btn btn-default">Cancelar</a>
-					</div>
-				</div>  
-			</form>			
-			<!-- /form Tel-Clientes -->
-            
-            <!-- form Lista Tel Clientes -->
-            <form id="form-lista-tel-clientes">
-                
-                <h3>Telefones de Clientes</h3>
-                <hr />
-                
-                <table id="tab-lista-tel-clientes"></table>
-                
-            </form>            
-            <!-- /form Lista Tel Clientes -->
-			
-			
-			<!-- form Fornecedores -->
-			<form method="post" id="form-fornecedores">
-				
-				<h3>Fornecedores</h3>
-				<hr />
-				
-				<div class="row">
-					<div class="form-group col-md-4">
-						<label for="cnpj">CNPJ</label>
-						<input type="text" class="form-control" id="cnpj" name="cnpj">
-					</div>
-
-					<div class="form-group col-md-8">
-						<label for="nome_fornecedor">Nome</label>
-						<input type="text" class="form-control" id="nome_fornecedor" name="nome_fornecedor">
-					</div>
-
-					<div class="form-group col-md-8">
-						<label for="endereco_fornecedor">Endereço</label>
-						<input type="text" class="form-control" id="endereco_fornecedor" name="endereco_fornecedor">
-					</div>
-				</div>			
-			
-				<hr />
-				<div id="actions" class="row">
-					<div class="col-md-12">
-                        <input type="hidden" class="form-control" name="acao" value="fornecedor/cadastro" >
-						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a href="index.html" class="btn btn-default">Cancelar</a>
-					</div>
-				</div>  
-			</form>			
-			<!-- /form Fornecedores -->
-            
-            <!-- form Lista Fornecedores -->
-            <form id="form-lista-fornecedores">
-                
-                <h3>Fornecedores</h3>
-                <hr />
-                
-                <table id="tab-lista-fornecedores"></table>
-                
-            </form>            
-            <!-- /form Lista Fornecedores -->
-            
-			<!-- form Tel-Fornecedores -->
-			<form method="post" id="form-tel-fornecedores">
-				
-				<h3>Telefones de Fornecedores</h3>
-				<hr />
-				
-				<div class="row">
-					<div class="form-group col-md-4">
-						<label for="pfk_cnpj">CNPJ</label>
-						<select class="select form-control" id="pfk_cnpj" name="pfk_cnpj" >
-							<option value="Selecione">
-								Selecione
-                            </option>
-						</select>						
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="numero_tel_fornecedor">Número</label>
-						<input type="text" class="form-control" id="numero_tel_fornecedor" name="numero_tel_fornecedor">
-					</div>
-
-				</div>			
-			
-				<hr />
-				<div id="actions" class="row">
-					<div class="col-md-12">
-                        <input type="hidden" class="form-control" name="acao" value="telFornecedor/cadastro" >
-						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a href="index.html" class="btn btn-default">Cancelar</a>
-					</div>
-				</div>  
-			</form>			
-			<!-- /form Tel-Fornecedores -->
-            
-            <!-- form Lista Tel Fornecedores -->
-            <form id="form-lista-tel-fornecedores">
-                
-                <h3>Telefones de Fornecedores</h3>
-                <hr />
-                
-                <table id="tab-lista-tel-fornecedores"></table>
-                
-            </form>            
-            <!-- /form Lista Tel Fornecedores -->
-			
-			
-			<!-- form Pedidos -->
-			<form method="post" id="form-pedidos">
-				
-				<h3>Pedido</h3>
-				<hr />
-				
-				<div class="row">
-					<div class="form-group col-md-4">
-						<label for="cpf_pedido">CPF</label>
-						<select class="select form-control" id="cpf_pedido" name="cpf_pedido" >
-							<option value="Selecione">
-								Selecione
-							</option>
-						</select>
-					</div>
-					
-					<div class="form-group col-md-3">
-						<label for="data_pedido">Data</label>
-						<div class="input-group date">
-							<input type="text" class="form-control" id="data_pedido" readonly name="data_pedido" >
-							<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span> 
-						</div>
-					</div>
-					
-					<div class="form-group col-md-3">
-						<label for="situacao_pedido">Situação</label>
-						<input type="text" class="form-control" id="situacao_pedido" name="situacao_pedido" value="Pedido Registrado" readonly>
-					</div>
-
-				</div>
-				
-				<div id="actions" class="row">
-					<div class="col-md-12">
-						<input type="hidden" class="form-control" name="acao" value="pedido/cadastroCallBack" >
-						<button type="submit" id="bt-salvar-pedido" class="btn btn-primary">Salvar Pedido</button>
-					</div>
-				</div>
-			
-			</form>
-			
-			<form method="post" id="form-itens-pedidos">
-			
-				<hr />				
-				<h3>Itens</h3>
-				<hr />
-				
-				<div class="row">
-					<div class="form-group col-md-2">
-						<label for="fpk_pedido">Pedido</label>
-						<input type="text" class="form-control" id="fpk_pedido" name="fpk_pedido"  readonly >
-					</div>
-					
-					<div class="form-group col-md-4">
-						<label for="item_produto">Produto</label>
-						<select class="select form-control" id="item_produto" name="item_produto">
-							<tr>
-								<th>Produto</th>
-								<th>Quantidade</th>
-								<th>Situação</th>
-							</tr>
-						</select>						
-						
-					</div>
-					
-					<div class="form-group col-md-2">
-						<label for="item_quantidade">Quantidade</label>
-						<input type="text" class="form-control" id="item_quantidade" name="item_quantidade" >
-					</div>
-
-					<div class="form-group col-md-2">
-						<label for="item_situacao">Situação</label>
-						<input type="text" class="form-control" id="item_situacao" name="item_situacao" value="Item Pendente" readonly >
-					</div>
-					
-						<button type="button" class="btn btn-primary glyphicon glyphicon-plus" id="bt-add-item-pedido" ></button>
-
-				</div>	
-
-				
-				<div class="panel panel-info">
-					<div class="panel-heading">
-						<h3 class="panel-title">Resumo do Pedido</h3>
-					</div>
-					
-					<div class="panel-body">
-					
-						<!-- Table -->
-						<table class="table" id="tbl-resumo-pedido">
-						
-						</table>
-						
-					
-					</div>
-				</div>
-				
-				<hr />
-				<div id="actions" class="row">
-					<div class="col-md-12">
-						<input type="hidden" class="form-control" name="acao" value="item/cadastro" >
-						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a href="index.html" class="btn btn-default">Cancelar</a>
-					</div>
-				</div>  
-			</form>			
-			<!-- /form Pedidos -->
-            
-			<!-- form Produtos -->
-            <form method="post" id="form-produtos">
-                
-                <h3>Produto</h3>
-                <hr />
-                
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label for="descricao_produto">Descrição</label>
-                        <input type="text" class="form-control" id="descricao_produto" name="descricao_produto">
-                    </div>
-                    
-                    <div class="form-group col-md-4">
-                        <label for="unidade_produto">Unidade</label>
-                        <input type="text" class="form-control" id="unidade_produto" name="unidade_produto">
-                    </div>
-                    
-                    <div class="form-group col-md-2">
-                        <label for="disponibilidade_produto">Disponibilidade</label>
-                        <input type="checkbox" class="form-control" id="disponibilidade_produto" name="disponibilidade_produto">
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                        <label for="preco_produto">Preço de Venda</label>
-                        <input type="text" class="form-control" id="preco_produto" name="preco_produto" >
-                    </div>
-
-                </div>
-                
-                <hr />
-                <div id="actions" class="row">
-                    <div class="col-md-12">
-                        <input type="hidden" class="form-control" name="acao" value="produto/cadastro" >
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                        <a href="index.html" class="btn btn-default">Cancelar</a>
-                    </div>
-                </div>
-            
-            </form>
-			<!-- /form Produtos -->
-            
-            <!-- form Lista Produtos -->
-            <form id="form-lista-produtos">
-                
-                <h3>Produtos</h3>
-                <hr />
-                
-                <table id="tab-lista-produtos"></table>
-                
-            </form>            
-            <!-- /form Lista Produtos --> 
-            
-        </div>
-        
-        <div class="modal fade" id="hid-modal-success">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Sucesso!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>A operação foi realizada com sucesso!</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->        
-
-        <div class="modal fade" id="hid-modal-error">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title">Erro!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>A operação não pode ser realizada!</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->        
+<!--
+<div class="row">
+    <div role="main" class="col-md-8 col-md-push-4">
 
     </div>
-	
-    <footer class="row">
-        
-    </footer>
+    <aside role="complementary" class="col-md-4 col-md-pull-8">
+
+    </aside>
+</div>
+-->
+
+<div class="row">
+
+<div class="no-gutter">
+    <aside role="complementary" class="col-md-2">
+
+        <!-- menu -->
+        <div id="MainMenu">
+            <div class="list-group list-special panel">
+                <a href="#opt1" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Clientes  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt1">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-clientes', 'cliente/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-clientes', '');" >Novo</a>
+                </div>
+
+                <a href="#opt2" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Tel. Clientes  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt2">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-tel-clientes', 'telCliente/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-tel-clientes', '');" >Novo</a>
+                </div>
+
+                <a href="#opt3" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Fornecedores  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt3">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-fornecedores', 'fornecedor/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-fornecedores', '');" >Novo</a>
+                </div>
+
+                <a href="#opt4" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Tel. Fornecedores  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt4">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-tel-fornecedores', 'telFornecedor/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-tel-fornecedores', '');" >Novo</a>
+                </div>
+
+                <!--
+                <a href="#opt5" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Pedidos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt5">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-pedidos', 'pedido/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-pedidos', '');" >Novo</a>
+                </div>
+                <!-- -->
+
+                <a href="#opt6" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
+                    Produtos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
+                </a>
+                <div class="collapse" id="opt6">
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-produtos', 'produto/lista');">Listar</a>
+                    <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-produtos', '');" > Novo </a>
+                </div>
+
+            </div>
+        </div>
+        <!-- /menu -->
+
+    </aside>
+</div>
+
+<div id="container-principal" role="main" class="col-md-10">
+
+<!-- form Clientes -->
+<form method="post" id="form-clientes">
+
+    <h3>Clientes</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf">
+        </div>
+
+        <div class="form-group col-md-8">
+            <label for="nome_cliente">Nome</label>
+            <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" >
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="email_cliente">E-mail</label>
+            <input type="text" class="form-control" id="email_cliente"  name="email_cliente"  >
+        </div>
+        <div class="form-group col-md-6">
+            <label for="endereco_cliente">Endereço</label>
+            <input type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" >
+        </div>
+        <div class="form-group col-md-2">
+            <label for="cep_cliente">CEP</label>
+            <input type="text" class="form-control" id="cep_cliente" name="cep_cliente" >
+        </div>
+        <div class="form-group col-md-4">
+            <label for="senha_cliente">Senha</label>
+            <input type="password" class="form-control" id="senha_cliente" name="senha_cliente" >
+        </div>
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="cliente/cadastro" >
+            <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+</form>
+<!-- /form Clientes -->
+
+<!-- form Lista Clientes -->
+<form id="form-lista-clientes">
+
+    <h3>Clientes</h3>
+    <hr />
+
+    <table id="tab-lista-clientes"></table>
+
+</form>
+<!-- /form Lista Clientes -->
+
+<!-- form Tel-Clientes -->
+<form method="post" id="form-tel-clientes">
+
+    <h3>Telefones de Clientes</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="pfk_cpf">CPF</label>
+            <select class="select form-control" id="pfk_cpf" name="pfk_cpf" >
+                <option value="Selecione">
+                    Selecione
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="numero_tel_cliente">Número</label>
+            <input type="text" class="form-control" id="numero_tel_cliente" name="numero_tel_cliente">
+        </div>
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="telCliente/cadastro" >
+            <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+</form>
+<!-- /form Tel-Clientes -->
+
+<!-- form Lista Tel Clientes -->
+<form id="form-lista-tel-clientes">
+
+    <h3>Telefones de Clientes</h3>
+    <hr />
+
+    <table id="tab-lista-tel-clientes"></table>
+
+</form>
+<!-- /form Lista Tel Clientes -->
+
+
+<!-- form Fornecedores -->
+<form method="post" id="form-fornecedores">
+
+    <h3>Fornecedores</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" class="form-control" id="cnpj" name="cnpj">
+        </div>
+
+        <div class="form-group col-md-8">
+            <label for="nome_fornecedor">Nome</label>
+            <input type="text" class="form-control" id="nome_fornecedor" name="nome_fornecedor">
+        </div>
+
+        <div class="form-group col-md-8">
+            <label for="endereco_fornecedor">Endereço</label>
+            <input type="text" class="form-control" id="endereco_fornecedor" name="endereco_fornecedor">
+        </div>
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="fornecedor/cadastro" >
+            <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+</form>
+<!-- /form Fornecedores -->
+
+<!-- form Lista Fornecedores -->
+<form id="form-lista-fornecedores">
+
+    <h3>Fornecedores</h3>
+    <hr />
+
+    <table id="tab-lista-fornecedores"></table>
+
+</form>
+<!-- /form Lista Fornecedores -->
+
+<!-- form Tel-Fornecedores -->
+<form method="post" id="form-tel-fornecedores">
+
+    <h3>Telefones de Fornecedores</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="pfk_cnpj">CNPJ</label>
+            <select class="select form-control" id="pfk_cnpj" name="pfk_cnpj" >
+                <option value="Selecione">
+                    Selecione
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="numero_tel_fornecedor">Número</label>
+            <input type="text" class="form-control" id="numero_tel_fornecedor" name="numero_tel_fornecedor">
+        </div>
+
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="telFornecedor/cadastro" >
+            <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+</form>
+<!-- /form Tel-Fornecedores -->
+
+<!-- form Lista Tel Fornecedores -->
+<form id="form-lista-tel-fornecedores">
+
+    <h3>Telefones de Fornecedores</h3>
+    <hr />
+
+    <table id="tab-lista-tel-fornecedores"></table>
+
+</form>
+<!-- /form Lista Tel Fornecedores -->
+
+
+<!-- form Pedidos -->
+<form method="post" id="form-pedidos">
+
+    <h3>Pedido</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="cpf_pedido">CPF</label>
+            <select class="select form-control" id="cpf_pedido" name="cpf_pedido" >
+                <option value="Selecione">
+                    Selecione
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="data_pedido">Data</label>
+            <div class="input-group date">
+                <input type="text" class="form-control" id="data_pedido" readonly name="data_pedido" >
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="situacao_pedido">Situação</label>
+            <input type="text" class="form-control" id="situacao_pedido" name="situacao_pedido" value="Pedido Registrado" readonly>
+        </div>
+
+    </div>
+
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="pedido/cadastroCallBack" >
+            <button type="submit" id="bt-salvar-pedido" class="btn btn-primary">Salvar Pedido</button>
+        </div>
+    </div>
+
+</form>
+
+<form method="post" id="form-itens-pedidos">
+
+    <hr />
+    <h3>Itens</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="fpk_pedido">Pedido</label>
+            <input type="text" class="form-control" id="fpk_pedido" name="fpk_pedido"  readonly >
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="item_produto">Produto</label>
+            <select class="select form-control" id="item_produto" name="item_produto">
+
+            </select>
+
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="item_quantidade">Quantidade</label>
+            <input type="text" class="form-control" id="item_quantidade" name="item_quantidade" >
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="item_situacao">Situação</label>
+            <input type="text" class="form-control" id="item_situacao" name="item_situacao" value="Item Pendente" readonly >
+        </div>
+
+        <button type="button" class="btn btn-primary glyphicon glyphicon-plus" id="bt-add-item-pedido" ></button>
+
+    </div>
+
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Resumo do Pedido</h3>
+        </div>
+
+        <div class="panel-body">
+
+            <!-- Table -->
+            <table class="table" id="tbl-resumo-pedido">
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Situação</th>
+                    <th>Ação</th>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="item/cadastro" >
+            <button type="button" class="btn btn-primary" id="bt-salvar-item-pedido">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+</form>
+<!-- /form Pedidos -->
+
+<!-- form Produtos -->
+<form method="post" id="form-produtos">
+
+    <h3>Produto</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group col-md-8">
+            <label for="descricao_produto">Descrição</label>
+            <input type="text" class="form-control" id="descricao_produto" name="descricao_produto">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="unidade_produto">Unidade</label>
+            <input type="text" class="form-control" id="unidade_produto" name="unidade_produto">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="disponibilidade_produto">Disponibilidade</label>
+            <input type="checkbox" class="form-control" id="disponibilidade_produto" name="disponibilidade_produto">
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="preco_produto">Preço de Venda</label>
+            <input type="text" class="form-control" id="preco_produto" name="preco_produto" >
+        </div>
+
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">
+            <input type="hidden" class="form-control" name="acao" value="produto/cadastro" >
+            <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            <a href="index.html" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>
+
+</form>
+<!-- /form Produtos -->
+
+<!-- form Lista Produtos -->
+<form id="form-lista-produtos">
+
+    <h3>Produtos</h3>
+    <hr />
+
+    <table id="tab-lista-produtos"></table>
+
+</form>
+<!-- /form Lista Produtos -->
+
+</div>
+
+<div class="modal fade" id="hid-modal-success">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Sucesso!</h4>
+            </div>
+            <div class="modal-body">
+                <p>A operação foi realizada com sucesso!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="hid-modal-error">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Erro!</h4>
+            </div>
+            <div class="modal-body">
+                <p>A operação não pode ser realizada!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</div>
+
+<footer class="row">
+
+</footer>
 
 </div>
 

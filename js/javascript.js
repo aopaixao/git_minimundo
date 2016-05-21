@@ -8,8 +8,10 @@ $('.list-group-item[data-toggle="collapse"]').click(function () {
 	}
 });
 
+
+//  dd/mm/yyyy
 $('.input-group.date').datepicker({
-	format: 'dd/mm/yyyy',
+	format: 'yyyy-mm-dd',
 	language: 'pt-BR',
 	weekStart: 0,
 	startDate:'0d',
@@ -19,26 +21,7 @@ $('.input-group.date').datepicker({
 
 $('#bt-add-item-pedido').click(function () {
 	
-	/**
-    var $tr = $('<tr>').append(
-        $('<th>').text($('Produto').val()),
-        $('<th>').text($('Quantidade').val()),
-        $('<th>').text($('Situação').val())
-    ).appendTo('#tbl-resumo-pedido');    
-	/**/
-	
-	/**
-    var $tr = $('<tr>').append(
-        $('<td>').text($('#item_produto').val()),
-        $('<td>').text($('#item_quantidade').val()),
-        $('<td>').text($('#item_situacao').val()),
-        $('<td>').text('<button type="button" class="btn btn-primary glyphicon glyphicon-minus" id="bt-del-item-pedido" ></button>')
-    ).appendTo('#tbl-resumo-pedido');
-	
-    $("#tbl-resumo-pedido").on('click','#bt-del-item-pedido',function(){
-        $(this).parent().parent().remove();
-    });
-	/**/
+
 	
 	$('#tbl-resumo-pedido').append(
    								    '<tr>'+
@@ -49,10 +32,9 @@ $('#bt-add-item-pedido').click(function () {
 									'</tr>'
 						          );	
 	
-	
-    
-    //$('#form-itens-pedido').find("input[type=text], textarea").val("");
-    $('#form-itens-pedido')[0].reset();
+    $('#form-itens-pedido').each (function(){
+        this.reset();
+    });
         
 });
 
@@ -83,7 +65,7 @@ $(function() {
 			options += '<option value="0">Selecione</option>';
 			
             $.each(json, function(key, value){
-                options += '<option value="' + value.codigo + '">' + value.descricao + '</option>';
+                options += '<option value="' + value.codigo + '">' + value.codigo + ' - ' + value.descricao + '</option>';
             });
             
             $("#item_produto").html(options);
@@ -161,10 +143,10 @@ function switchView(id_target, class_action)
 //function switchView('form-clientes', 'cliente/lista')
 {
     
-    //Fecha todos os outros formulários
+    //Fecha todos os outros formulï¿½rios
     $('#container-principal').find('form').hide()
     
-    //Não foi passada nenhuma ação. Logo, será exibido o formulário de Cadastro
+    //Nï¿½o foi passada nenhuma aï¿½ï¿½o. Logo, serï¿½ exibido o formulï¿½rio de Cadastro
     if(class_action.length == 0){
 		
 		if(id_target.toLowerCase().indexOf("div") >= 0){
@@ -425,32 +407,26 @@ function deleteRecord(class_action, pk)
     }
 }
 
-/*
-function submitForm(idForm)
-{
-    alert($('#'+idForm).find('input').length);
-    alert($('#'+idForm).serialize());
-    
-    console.log('Form:' + $('#'+idForm).serialize() );
-    
-}
-*/
-
-$( "form" ).on( "submit", function( event ) {
+$( ".btn-salvar" ).click(function ( event ) {
     event.preventDefault();
 
-    var form = $(this);
+    var form = $(this).parents('form:first');
+
     var name = $("[name='acao']", form).val();
   
     $.ajax({
         type: "POST",
         url: host_name+'/minimundo/controller/'+name,
-        data: $(this).serialize(),
+        data: form.serialize(),
         dataType: "json",
         success: function(json){
             if(json){
                 $('#hid-modal-success').modal('show');
-                $(this)[0].reset();
+
+                $(form).each (function(){
+                    this.reset();
+                });
+
             }else{
                 $('#hid-modal-error').modal('show')
             }
@@ -461,8 +437,7 @@ $( "form" ).on( "submit", function( event ) {
 });
 
 $('#bt-salvar-pedido').click(function () {
-	alert('botão pedido');
-	
+
     var form = $('#form-pedidos');
     var name = $("[name='acao']", form).val();
   
@@ -472,15 +447,20 @@ $('#bt-salvar-pedido').click(function () {
         data: $('#form-pedidos').serialize(),
         dataType: "json",
         success: function(json){
-            if(json.length > 0){
+
+            if(json.numero.length > 0){
                 $('#hid-modal-success').modal('show');
                 
 				$('#form-itens-pedidos').show();
-				$('#fpk_pedido').val(json.numero);
+
+                $('#fpk_pedido').val(json.numero);
 				
 				console.log('pedido: '+json.numero);
 				
-                $('#form-pedidos')[0].reset();
+                $('#form-pedidos').each (function(){
+                    this.reset();
+                });
+
             }else{
                 $('#hid-modal-error').modal('show')
             }
@@ -489,4 +469,53 @@ $('#bt-salvar-pedido').click(function () {
   
     console.log( $('#form-pedidos').serialize() );	
 	
+});
+
+$('#bt-salvar-item-pedido').click(function () {
+
+    var TableData = new Array();
+
+    $('#tbl-resumo-pedido tr').each(function(row, tr){
+        TableData[row]={
+              "numero_pedido"      : $('#fpk_pedido').val()
+            , "codigo_produto"     : $(tr).find('td:eq(0)').text()
+            , "quantidade_produto" : $(tr).find('td:eq(1)').text()
+            , "situacao_item"      : $(tr).find('td:eq(2)').text()
+        }
+    });
+    TableData.shift();
+
+    TableDataJsonStr = JSON.stringify(TableData);
+
+    $.ajax({
+        type: "POST",
+        url: host_name+'/minimundo/controller/item/cadastro',
+        data: "pTableData=" + TableDataJsonStr,
+        dataType: "json",
+        success: function(json){
+            if(json){
+                $('#hid-modal-success').modal('show');
+
+				$('#form-itens-pedidos').show();
+				$('#fpk_pedido').val(json.numero);
+
+				console.log('pedido: '+json.numero);
+
+                $('#form-itens-pedidos').each (function(){
+                    this.reset();
+                });
+
+                $('#tbl-resumo-pedido').find('tr').remove();
+
+                $('#form-itens-pedidos').hide();
+
+            }else{
+                $('#hid-modal-error').modal('show')
+            }
+        }
+    });
+
+    //str = JSON.stringify(TableData, null, 4); // (Optional) beautiful indented output.
+    console.log(TableDataJsonStr);
+
 });

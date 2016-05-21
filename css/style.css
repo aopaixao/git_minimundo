@@ -125,11 +125,11 @@ width:100%;
 }
 
 #tbl-resumo-pedido tr:nth-child(even) {
-background-color: #31708f;
+background-color: #d9edf7;
 }
 
 #tbl-resumo-pedido tr:hover {
-background-color: #d9edf7;
+background-color: #31708f;
 } 
 
 #tbl-resumo-pedido tr td {
