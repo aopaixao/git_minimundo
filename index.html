@@ -73,17 +73,15 @@
                     <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-tel-fornecedores', '');" >Novo</a>
                 </div>
 
-
+                <!-- -->
                 <a href="#opt5" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
                     Pedidos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
                 </a>
                 <div class="collapse" id="opt5">
-                    <!--
                     <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-lista-pedidos', 'pedido/lista');">Listar</a>
-                    <!-- -->
                     <a href="javascript:void(0)" class="list-group-item subit" onclick="switchView('form-pedidos', '');" >Novo</a>
                 </div>
-
+                <!-- -->
 
                 <a href="#opt6" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu">
                     Produtos  <span class="glyphicon glyphicon-plus-sign pull-right"></span>
@@ -329,7 +327,7 @@
     <div id="actions" class="row">
         <div class="col-md-12">
             <input type="hidden" class="form-control" name="acao" value="pedido/cadastroCallBack" >
-            <button type="submit" id="bt-salvar-pedido" class="btn btn-primary">Salvar Pedido</button>
+            <button type="button" id="bt-salvar-pedido" class="btn btn-primary">Salvar Pedido</button>
         </div>
     </div>
 
@@ -338,7 +336,7 @@
 <form method="post" id="form-itens-pedidos">
 
     <hr />
-    <h3>Itens</h3>
+    <h4>Adicione Itens ao Pedido</h4>
     <hr />
 
     <div class="row">
@@ -401,6 +399,24 @@
     </div>
 </form>
 <!-- /form Pedidos -->
+
+<!-- form Lista Pedidos -->
+<form id="form-lista-pedidos">
+
+    <h3>Pedidos</h3>
+    <hr />
+
+    <table id="tab-lista-pedidos"></table>
+
+</form>
+
+<div class="panel-body" id="cont-tab-lista-itens-pedidos">
+    <table id="tab-lista-itens-pedidos"></table>
+</div>
+
+
+
+<!-- /form Lista Pedidos -->
 
 <!-- form Produtos -->
 <form method="post" id="form-produtos">
