@@ -14,9 +14,12 @@ Class item{
     
     public function lista($id = "")
     {
-        
+        if(isset($_POST['numero'])){
+            $id = $_POST['numero'];
+        }
+
         if(! empty($id)){
-            $where = "WHERE codigo = ?";
+            $where = "WHERE numero = ?";
             $arrayParam = array($id);  
         }else{
             $where      = "";
@@ -62,9 +65,9 @@ Class item{
     
     public function apaga($dados)
     {
-        $arrayCond = array('cpf=' => $_POST['cpf']);  
-        $retorno   = $this->crud->delete($arrayCond);  
-        
+        $arrayCond = array('numero=' => $dados['numero'], 'codigo=' => $dados['codigo']);
+        $retorno = $this->crud->delete($arrayCond);
+
         return $retorno;
     }
     

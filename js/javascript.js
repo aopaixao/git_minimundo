@@ -134,6 +134,52 @@ $(function() {
             $("#pfk_cnpj").html(options);
         }
     });
+
+    $("#tab-lista-pedidos").on("click", "tr", function(){
+
+        $('#cont-tab-lista-itens-pedidos').hide();
+        $('#tab-lista-itens-pedidos').hide();
+
+        var numPedido = $(this).find('td:eq(0)').text();
+
+        $.ajax({
+            type: "POST",
+            url: host_name+'/minimundo/controller/item/lista',
+            data: {numero: numPedido},
+            dataType: "json",
+            success: function(json){
+                if(json) {
+
+                    $('#tab-lista-itens-pedidos').html(
+                        '<caption>Detalhes do Pedido Nº ' + numPedido + '</caption>'+
+                        '<tr>' +
+                        '<th>Numero</th>' +
+                        '<th>Codigo</th>' +
+                        '<th>Quantidade</th>' +
+                        '<th>Situação</th>' +
+                        '<th>Ação</th>' +
+                        '</tr>'
+                    );
+
+                    $.each(json, function (i, obj) {
+                        console.log(obj);
+                        $('#tab-lista-itens-pedidos').append(
+                            '<tr>' +
+                            '<td>' + obj.numero + '</td>' +
+                            '<td>' + obj.codigo + '</td>' +
+                            '<td>' + obj.quantidade + '</td>' +
+                            '<td>' + obj.situacao + '</td>' +
+                            '<td><button type="button" class="btn btn-danger glyphicon glyphicon-minus" onclick="deleteRecord(\'item/apaga\', '+ '\'' + obj.numero + '#' + obj.codigo + '\''  +')" ></button></td>'+
+                            '</tr>'
+                        );
+                    });
+
+                    $('#cont-tab-lista-itens-pedidos').show();
+                    $('#tab-lista-itens-pedidos').show();
+                }
+            }
+        });
+    });
     
     
 
@@ -301,9 +347,34 @@ function switchView(id_target, class_action)
                         
                         $('#form-lista-produtos').show();
                         $('#tab-lista-produtos').show();
+                    }else if(id_target.toLowerCase().localeCompare("form-lista-pedidos") == 0){
+
+                        $('#tab-lista-pedidos').html(
+                                       '<tr>'+
+                                        '<th>Numero</th>'+
+                                        '<th>CPF</th>'+
+                                        '<th>Data</th>'+
+                                        '<th>Situação</th>'+
+                                        '<th>Açao</th>'+
+                                    '</tr>'
+                                  );
+
+                        $.each(json, function(i, obj){
+                            console.log(obj);
+                            $('#tab-lista-pedidos').append(
+                                       '<tr>'+
+                                        '<td>'+ obj.numero    +'</td>'+
+                                        '<td>'+ obj.cpf +'</td>'+
+                                        '<td>'+ obj.data +'</td>'+
+                                        '<td>'+ obj.situacao +'</td>'+
+                                        '<td><button type="button" class="btn btn-danger glyphicon glyphicon-minus" id="bt-del-cliente" onclick="deleteRecord(\'pedido/apaga\', '+ '\'' + obj.numero  + '\''  +')" ></button></td>'+
+                                    '</tr>'
+                                  );
+                        });
+
+                        $('#form-lista-pedidos').show();
+                        $('#tab-lista-pedidos').show();
                     }
-                    
-                    
                     
                 }
             }
@@ -324,8 +395,8 @@ function deleteRecord(class_action, pk)
             dataType: "json",
             success: function(json){
                 if(json){
+                    switchView('form-lista-clientes', 'cliente/lista');
                     $('#hid-modal-success').modal('show');
-                    $(this)[0].reset();
                 }else{
                     $('#hid-modal-error').modal('show')
                 }
@@ -343,8 +414,8 @@ function deleteRecord(class_action, pk)
             dataType: "json",
             success: function(json){
                 if(json){
+                    switchView('form-lista-tel-clientes', 'telCliente/lista');
                     $('#hid-modal-success').modal('show');
-                    $(this)[0].reset();
                 }else{
                     $('#hid-modal-error').modal('show')
                 }
@@ -360,8 +431,8 @@ function deleteRecord(class_action, pk)
             dataType: "json",
             success: function(json){
                 if(json){
+                    switchView('form-lista-fornecedores', 'fornecedor/lista');
                     $('#hid-modal-success').modal('show');
-                    $(this)[0].reset();
                 }else{
                     $('#hid-modal-error').modal('show')
                 }
@@ -379,8 +450,8 @@ function deleteRecord(class_action, pk)
             dataType: "json",
             success: function(json){
                 if(json){
+                    switchView('form-lista-tel-fornecedores', 'telFornecedor/lista');
                     $('#hid-modal-success').modal('show');
-                    $(this)[0].reset();
                 }else{
                     $('#hid-modal-error').modal('show')
                 }
@@ -396,15 +467,55 @@ function deleteRecord(class_action, pk)
             dataType: "json",
             success: function(json){
                 if(json){
+                    switchView('form-lista-produtos', 'produto/lista');
                     $('#hid-modal-success').modal('show');
-                    $(this)[0].reset();
                 }else{
                     $('#hid-modal-error').modal('show')
                 }
             }
         });
             
+    }else if(classAction.toLowerCase().localeCompare("pedidoapaga") == 0){
+
+        $.ajax({
+            type: "POST",
+            url: host_name+'/minimundo/controller/'+class_action,
+            data:{numero: pk},
+            dataType: "json",
+            success: function(json){
+                if(json){
+
+                    switchView('form-lista-pedidos', 'pedido/lista');
+
+                    $('#hid-modal-success').modal('show');
+
+                }else{
+                    $('#hid-modal-error').modal('show')
+                }
+            }
+        });
+
+    }else if(classAction.toLowerCase().localeCompare("itemapaga") == 0){
+
+        var arrStr = pk.split("#");
+
+        $.ajax({
+            type: "POST",
+            url: host_name+'/minimundo/controller/'+class_action,
+            data:{numero: arrStr[0], codigo: arrStr[1]},
+            dataType: "json",
+            success: function(json){
+                if(json){
+                    switchView('form-lista-pedidos', 'pedido/lista');
+                    $('#hid-modal-success').modal('show');
+                }else{
+                    $('#hid-modal-error').modal('show')
+                }
+            }
+        });
+
     }
+
 }
 
 $( ".btn-salvar" ).click(function ( event ) {

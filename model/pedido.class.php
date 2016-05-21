@@ -56,6 +56,21 @@ Class pedido{
 			return "";
 		}
     }
+
+    public function apaga($dados)
+    {
+        $arrayCond = array('numero=' => $_POST['numero']);
+        $retorno   = $this->crud->delete($arrayCond);
+
+        if($retorno){
+            $this->crud = CRUDGenerico::getInstance('itens');
+
+            $arrayCondIt = array('numero=' => $_POST['numero']);
+            $retorno   = $this->crud->delete($arrayCondIt);
+        }
+
+        return $retorno;
+    }
     
 }
 

@@ -106,7 +106,8 @@ margin:0;
 #form-clientes, #form-tel-clientes, #form-fornecedores, #form-tel-fornecedores, #form-pedidos, 
 #form-produtos, #form-itens-pedidos, #hid-modal-success, #form-lista-clientes, #tab-lista-clientes,
 #form-lista-tel-clientes, #tab-lista-tel-clientes, #form-lista-fornecedores, #tab-lista-fornecedores,
-#form-lista-tel-fornecedores, #tab-lista-tel-fornecedores, #form-lista-produtos, #tab-lista-produtos
+#form-lista-tel-fornecedores, #tab-lista-tel-fornecedores, #form-lista-produtos, #tab-lista-produtos,
+#form-lista-pedidos, #tab-lista-pedidos, #tab-lista-itens-pedidos, #cont-tab-lista-itens-pedidos
 {
 	display:none;
 }
@@ -132,6 +133,10 @@ background-color: #d9edf7;
 background-color: #31708f;
 } 
 
+#tbl-resumo-pedido tr:active {
+background-color: #31708f;
+}
+
 #tbl-resumo-pedido tr td {
 height: 50px;
 width:303px;
@@ -144,6 +149,11 @@ text-align:center;
 table {
 border-collapse: collapse;
 width: 100%;
+}
+
+table caption {
+    font-weight: bold;
+    color: #204d74;
 }
 
 table tr, table tr td {
@@ -161,6 +171,10 @@ background-color: #d9edf7;
 table tr:hover {
 background-color: #31708f;
 } 
+
+table tr:active {
+background-color: #31708f;
+}
 
 table tr td {
 height: 50px;

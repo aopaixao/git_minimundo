@@ -1,13 +1,13 @@
 <?php  
   
  /*************************************************************************************************************** 
- * @author Alexandre Paixão                                                                                     *  
+ * @author Alexandre Paixï¿½o                                                                                     *  
  * Data: 20/06/2014                                                                                             *
- * Título: CRUD genérico                                                                                        *  
- * Descrição: A Classe de CRUD genérico foi elaborada com o objetivo de auxlilar nas operações CRUDs em diversos* 
- * SGBDS, possui funcionalidades para construir instruções de INSERT, UPDATE E DELETE onde as mesmas podem ser  *
- * executadas nos principais SGBDs, exemplo SQL Server, MySQL e Firebird. Instruções SELECT são recebidas       *
- * integralmente via parâmetro.                                                                                 *  
+ * Tï¿½tulo: CRUD genï¿½rico                                                                                        *  
+ * Descriï¿½ï¿½o: A Classe de CRUD genï¿½rico foi elaborada com o objetivo de auxlilar nas operaï¿½ï¿½es CRUDs em diversos* 
+ * SGBDS, possui funcionalidades para construir instruï¿½ï¿½es de INSERT, UPDATE E DELETE onde as mesmas podem ser  *
+ * executadas nos principais SGBDs, exemplo SQL Server, MySQL e Firebird. Instruï¿½ï¿½es SELECT sï¿½o recebidas       *
+ * integralmente via parï¿½metro.                                                                                 *  
  *************************************************************************************************************/  
   
 header('Content-Type: text/html; charset=utf-8'); 
@@ -20,18 +20,18 @@ require_once("dbo/Conn.class.php");
  
 Class CRUDGenerico{   
 
-    // Atributo para guardar uma conexão PDO   
+    // Atributo para guardar uma conexï¿½o PDO   
     private $pdo         = null;   
 
-    // Atributo onde será guardado o nome da tabela    
+    // Atributo onde serï¿½ guardado o nome da tabela    
     private $tabela      = null;   
 
-    // Atributo estático que contém uma instância da própria classe   
+    // Atributo estï¿½tico que contï¿½m uma instï¿½ncia da prï¿½pria classe   
     private static $crud = null;   
       
     /*   
-    * Método privado construtor da classe    
-    * @param $conexao = Conexão PDO configurada   
+    * Mï¿½todo privado construtor da classe    
+    * @param $conexao = Conexï¿½o PDO configurada   
     * @param $tabela = Nome da tabela    
     */   
     private function __construct($tabela=NULL)
@@ -42,7 +42,7 @@ Class CRUDGenerico{
         if (!empty($conexao)){  
             $this->pdo = Conn::getInstance();
         }else{  
-            echo "<h3>Conexão inexistente!</h3>";  
+            echo "<h3>Conexï¿½o inexistente!</h3>";  
             exit();  
         }   
         /**/
@@ -54,29 +54,29 @@ Class CRUDGenerico{
     }   
 
     /*    
-    * Método público estático que retorna uma instância da classe Crud    
-    * @param $conexao = Conexão PDO configurada   
+    * Mï¿½todo pï¿½blico estï¿½tico que retorna uma instï¿½ncia da classe Crud    
+    * @param $conexao = Conexï¿½o PDO configurada   
     * @param $tabela = Nome da tabela   
-    * @return Atributo contendo instância da classe Crud   
+    * @return Atributo contendo instï¿½ncia da classe Crud   
     */   
     public static function getInstance($tabela=NULL)
     {   
      
-        // Verifica se existe uma instância da classe   
-        if(!isset(self::$crud)){   
+        // Verifica se existe uma instï¿½ncia da classe   
+        //if(!isset(self::$crud)){
             try {   
                 self::$crud = new CRUDGenerico($tabela);   
             } catch (Exception $e) {   
                 echo "Erro " . $e->getMessage();   
             }   
-        }   
+        //}
 
         return self::$crud;   
      
     }   
 
     /*  
-    * Método para setar o nome da tabela na propriedade $tabela  
+    * Mï¿½todo para setar o nome da tabela na propriedade $tabela  
     * @param $tabela = String contendo o nome da tabela  
     */   
     public function setTableName($tabela)
@@ -87,90 +87,90 @@ Class CRUDGenerico{
     }  
 
     /*   
-    * Método privado para construção da instrução SQL de INSERT   
+    * Mï¿½todo privado para construï¿½ï¿½o da instruï¿½ï¿½o SQL de INSERT   
     * @param $arrayDados = Array de dados contendo colunas e valores   
-    * @return String contendo instrução SQL   
+    * @return String contendo instruï¿½ï¿½o SQL   
     */    
     private function buildInsert($arrayDados)
     {   
 
-        // Inicializa variáveis   
+        // Inicializa variï¿½veis   
         $sql = "";   
         $campos = "";   
         $valores = "";   
 
-        // Loop para montar a instrução com os campos e valores   
+        // Loop para montar a instruï¿½ï¿½o com os campos e valores   
         foreach($arrayDados as $chave => $valor){   
             $campos .= $chave . ', ';   
             $valores .= '?, ';   
         }
            
 
-        // Retira vírgula do final da string   
+        // Retira vï¿½rgula do final da string   
         $campos = (substr($campos, -2) == ', ') ? trim(substr($campos, 0, (strlen($campos) - 2))) : $campos ;    
 
-        // Retira vírgula do final da string   
+        // Retira vï¿½rgula do final da string   
         $valores = (substr($valores, -2) == ', ') ? trim(substr($valores, 0, (strlen($valores) - 2))) : $valores ;    
 
-        // Concatena todas as variáveis e finaliza a instrução   
+        // Concatena todas as variï¿½veis e finaliza a instruï¿½ï¿½o   
         $sql .= "INSERT INTO {$this->tabela} (" . $campos . ")VALUES(" . $valores . ")";   
 
-        // Retorna string com instrução SQL   
+        // Retorna string com instruï¿½ï¿½o SQL   
         return trim($sql);
            
     }   
 
     /*   
-    * Método privado para construção da instrução SQL de UPDATE   
+    * Mï¿½todo privado para construï¿½ï¿½o da instruï¿½ï¿½o SQL de UPDATE   
     * @param $arrayDados = Array de dados contendo colunas, operadores e valores   
-    * @param $arrayCondicao = Array de dados contendo colunas e valores para condição WHERE   
-    * @return String contendo instrução SQL   
+    * @param $arrayCondicao = Array de dados contendo colunas e valores para condiï¿½ï¿½o WHERE   
+    * @return String contendo instruï¿½ï¿½o SQL   
     */    
     private function buildUpdate($arrayDados, $arrayCondicao)
     {   
 
-        // Inicializa variáveis   
+        // Inicializa variï¿½veis   
         $sql = "";   
         $valCampos = "";   
         $valCondicao = "";   
 
-        // Loop para montar a instrução com os campos e valores   
+        // Loop para montar a instruï¿½ï¿½o com os campos e valores   
         foreach($arrayDados as $chave => $valor){   
             $valCampos .= $chave . '=?, ';   
         }   
 
-        // Loop para montar a condição WHERE   
+        // Loop para montar a condiï¿½ï¿½o WHERE   
         foreach($arrayCondicao as $chave => $valor){   
             $valCondicao .= $chave . '? AND ';   
         }   
 
-        // Retira vírgula do final da string   
+        // Retira vï¿½rgula do final da string   
         $valCampos = (substr($valCampos, -2) == ', ') ? trim(substr($valCampos, 0, (strlen($valCampos) - 2))) : $valCampos ;    
 
-        // Retira vírgula do final da string   
+        // Retira vï¿½rgula do final da string   
         $valCondicao = (substr($valCondicao, -4) == 'AND ') ? trim(substr($valCondicao, 0, (strlen($valCondicao) - 4))) : $valCondicao ;    
 
-        // Concatena todas as variáveis e finaliza a instrução   
+        // Concatena todas as variï¿½veis e finaliza a instruï¿½ï¿½o   
         $sql .= "UPDATE {$this->tabela} SET " . $valCampos . " WHERE " . $valCondicao;   
 
-        // Retorna string com instrução SQL   
+        // Retorna string com instruï¿½ï¿½o SQL   
         return trim($sql);
        
     }   
 
     /*   
-    * Método privado para construção da instrução SQL de DELETE   
-    * @param $arrayCondicao = Array de dados contendo colunas, operadores e valores para condição WHERE   
-    * @return String contendo instrução SQL   
+    * Mï¿½todo privado para construï¿½ï¿½o da instruï¿½ï¿½o SQL de DELETE   
+    * @param $arrayCondicao = Array de dados contendo colunas, operadores e valores para condiï¿½ï¿½o WHERE   
+    * @return String contendo instruï¿½ï¿½o SQL   
     */    
     private function buildDelete($arrayCondicao)
     {   
 
-        // Inicializa variáveis   
+        // Inicializa variï¿½veis   
         $sql = "";   
         $valCampos= "";   
 
-        // Loop para montar a instrução com os campos e valores   
+        // Loop para montar a instruï¿½ï¿½o com os campos e valores   
         foreach($arrayCondicao as $chave => $valor){   
             $valCampos .= $chave . '? AND ';   
         }   
@@ -178,30 +178,30 @@ Class CRUDGenerico{
         // Retira a palavra AND do final da string   
         $valCampos = (substr($valCampos, -4) == 'AND ') ? trim(substr($valCampos, 0, (strlen($valCampos) - 4))) : $valCampos ;    
 
-        // Concatena todas as variáveis e finaliza a instrução   
+        // Concatena todas as variï¿½veis e finaliza a instruï¿½ï¿½o   
         $sql .= "DELETE FROM {$this->tabela} WHERE " . $valCampos;   
 
-        // Retorna string com instrução SQL   
+        // Retorna string com instruï¿½ï¿½o SQL   
         return trim($sql); 
       
     }   
 
     /*   
-    * Método público para inserir os dados na tabela   
+    * Mï¿½todo pï¿½blico para inserir os dados na tabela   
     * @param $arrayDados = Array de dados contendo colunas e valores   
-    * @return Retorna resultado booleano da instrução SQL   
+    * @return Retorna resultado booleano da instruï¿½ï¿½o SQL   
     */   
     public function insert($arrayDados)
     {   
         try {   
 
-            // Atribui a instrução SQL construida no método   
+            // Atribui a instruï¿½ï¿½o SQL construida no mï¿½todo   
             $sql = $this->buildInsert($arrayDados);   
 
-            // Passa a instrução para o PDO   
+            // Passa a instruï¿½ï¿½o para o PDO   
             $stm = $this->pdo->prepare($sql);   
 
-            // Loop para passar os dados como parâmetro   
+            // Loop para passar os dados como parï¿½metro   
             $cont = 1;   
             
             foreach ($arrayDados as $valor){   
@@ -209,7 +209,7 @@ Class CRUDGenerico{
                 $cont++;   
             }   
 
-            // Executa a instrução SQL e captura o retorno   
+            // Executa a instruï¿½ï¿½o SQL e captura o retorno   
             $retorno = $stm->execute();   
 
             return $retorno;   
@@ -220,35 +220,35 @@ Class CRUDGenerico{
     }   
 
     /*   
-    * Método público para atualizar os dados na tabela   
+    * Mï¿½todo pï¿½blico para atualizar os dados na tabela   
     * @param $arrayDados = Array de dados contendo colunas e valores   
-    * @param $arrayCondicao = Array de dados contendo colunas e valores para condição WHERE - Exemplo array('$id='=>1)   
-    * @return Retorna resultado booleano da instrução SQL   
+    * @param $arrayCondicao = Array de dados contendo colunas e valores para condiï¿½ï¿½o WHERE - Exemplo array('$id='=>1)   
+    * @return Retorna resultado booleano da instruï¿½ï¿½o SQL   
     */   
     public function update($arrayDados, $arrayCondicao)
     {   
         try {   
 
-            // Atribui a instrução SQL construida no método   
+            // Atribui a instruï¿½ï¿½o SQL construida no mï¿½todo   
             $sql = $this->buildUpdate($arrayDados, $arrayCondicao);   
 
-            // Passa a instrução para o PDO   
+            // Passa a instruï¿½ï¿½o para o PDO   
             $stm = $this->pdo->prepare($sql);   
 
-            // Loop para passar os dados como parâmetro   
+            // Loop para passar os dados como parï¿½metro   
             $cont = 1;   
             foreach ($arrayDados as $valor){   
                 $stm->bindValue($cont, $valor);   
                 $cont++;   
             }   
 
-            // Loop para passar os dados como parâmetro cláusula WHERE   
+            // Loop para passar os dados como parï¿½metro clï¿½usula WHERE   
             foreach ($arrayCondicao as $valor){   
                 $stm->bindValue($cont, $valor);   
                 $cont++;   
             }   
 
-            // Executa a instrução SQL e captura o retorno   
+            // Executa a instruï¿½ï¿½o SQL e captura o retorno   
             $retorno = $stm->execute();   
 
             return $retorno;   
@@ -259,27 +259,27 @@ Class CRUDGenerico{
     }   
 
     /*   
-    * Método público para excluir os dados na tabela   
-    * @param $arrayCondicao = Array de dados contendo colunas e valores para condição WHERE - Exemplo array('$id='=>1)   
-    * @return Retorna resultado booleano da instrução SQL   
+    * Mï¿½todo pï¿½blico para excluir os dados na tabela   
+    * @param $arrayCondicao = Array de dados contendo colunas e valores para condiï¿½ï¿½o WHERE - Exemplo array('$id='=>1)   
+    * @return Retorna resultado booleano da instruï¿½ï¿½o SQL   
     */   
     public function delete($arrayCondicao)
     {   
         try {   
-            // Atribui a instrução SQL construida no método   
+            // Atribui a instruï¿½ï¿½o SQL construida no mï¿½todo   
             $sql = $this->buildDelete($arrayCondicao);   
 
-            // Passa a instrução para o PDO   
+            // Passa a instruï¿½ï¿½o para o PDO   
             $stm = $this->pdo->prepare($sql);   
 
-            // Loop para passar os dados como parâmetro cláusula WHERE   
+            // Loop para passar os dados como parï¿½metro clï¿½usula WHERE   
             $cont = 1;   
             foreach ($arrayCondicao as $valor){   
                 $stm->bindValue($cont, $valor);   
                 $cont++;   
-            }   
+            }
 
-            // Executa a instrução SQL e captura o retorno   
+            // Executa a instruï¿½ï¿½o SQL e captura o retorno
             $retorno = $stm->execute();   
 
             return $retorno;   
@@ -290,23 +290,23 @@ Class CRUDGenerico{
     }   
 
     /*  
-    * Método genérico para executar instruções de consulta independente do nome da tabela passada no _construct  
-    * @param $sql = Instrução SQL inteira contendo, nome das tabelas envolvidas, JOINS, WHERE, ORDER BY, GROUP BY e LIMIT  
-    * @param $arrayParam = Array contendo somente os parâmetros necessários para clásusla WHERE  
-    * @param $fetchAll  = Valor booleano com valor default TRUE indicando que serão retornadas várias linhas, FALSE retorna apenas a primeira linha  
+    * Mï¿½todo genï¿½rico para executar instruï¿½ï¿½es de consulta independente do nome da tabela passada no _construct  
+    * @param $sql = Instruï¿½ï¿½o SQL inteira contendo, nome das tabelas envolvidas, JOINS, WHERE, ORDER BY, GROUP BY e LIMIT  
+    * @param $arrayParam = Array contendo somente os parï¿½metros necessï¿½rios para clï¿½susla WHERE  
+    * @param $fetchAll  = Valor booleano com valor default TRUE indicando que serï¿½o retornadas vï¿½rias linhas, FALSE retorna apenas a primeira linha  
     * @return Retorna array de dados da consulta em forma de objetos  
     */  
     public function getSQLGeneric($sql, $arrayParams="", $fetchAll="")
     {  
         try {   
 
-            // Passa a instrução para o PDO   
+            // Passa a instruï¿½ï¿½o para o PDO   
             $stm = $this->pdo->prepare($sql); 
             
-            // Verifica se existem condições para carregar os parâmetros    
+            // Verifica se existem condiï¿½ï¿½es para carregar os parï¿½metros    
             if (!empty($arrayParams)){   
 
-                // Loop para passar os dados como parâmetro cláusula WHERE   
+                // Loop para passar os dados como parï¿½metro clï¿½usula WHERE   
                 $cont = 1;   
                 foreach ($arrayParams as $valor){   
                     $stm->bindValue($cont, $valor);   
@@ -315,11 +315,11 @@ Class CRUDGenerico{
 
             }
 
-            // Executa a instrução SQL    
+            // Executa a instruï¿½ï¿½o SQL    
             $stm->execute();   
             
             /**/
-            // Verifica se é necessário retornar várias linhas  
+            // Verifica se ï¿½ necessï¿½rio retornar vï¿½rias linhas  
             if(empty($fetchAll)){   
                 $dados = $stm->fetchAll(PDO::FETCH_OBJ);  
                 //$dados = $stm->fetchAll(PDO::FETCH_ASSOC);  

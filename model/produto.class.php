@@ -43,8 +43,8 @@ Class produto{
     public function apaga($dados)
     {
         $arrayCond = array('codigo=' => $_POST['codigo']);  
-        $retorno   = $this->crud->delete($arrayCond);  
-        
+        $retorno   = $this->crud->delete($arrayCond);
+
         return $retorno;
     }
     
