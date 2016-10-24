@@ -5,13 +5,13 @@ error_reporting(E_ALL);
  
  
 /*  
-* Constantes de par‚metros para configuraÁ„o da conex„o  
+* Constantes de par√¢metros para configura√ß√£o da conex√£o  
 */  
 define('HOST', 'mysql.petamus.com.br');  
 define('DBNAME', 'petamus_minimundo');  
 define('CHARSET', 'utf8');  
 define('USER', 'petamus_db_root');  
-define('PASSWORD', '3nGpQPnhaA'); 
+define('PASSWORD', 'my_password'); 
 
 //mysql -u petamus_db_root -p -h mysql.petamus.com.br petamus_minimundo 
 //petamus_db_root  - root_minimundo
@@ -20,7 +20,7 @@ define('PASSWORD', '3nGpQPnhaA');
 Class Conn {  
 
     /*  
-    * Atributo est·tico para inst‚ncia do PDO  
+    * Atributo est√°tico para inst√¢ncia do PDO  
     */  
     private static $pdo;
 
@@ -33,8 +33,8 @@ Class Conn {
     } 
 
     /*  
-    * MÈtodo est·tico para retornar uma conex„o v·lida  
-    * Verifica se j· existe uma inst‚ncia da conex„o, caso n„o, configura uma nova conex„o  
+    * M√©todo est√°tico para retornar uma conex√£o v√°lida  
+    * Verifica se j√° existe uma inst√¢ncia da conex√£o, caso n√£o, configura uma nova conex√£o  
     */  
     public static function getInstance() 
     {  
